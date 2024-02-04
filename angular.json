@@ -3,5 +3,93 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "fitness-tracker": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/fitness-tracker",
+      "sourceRoot": "projects/fitness-tracker/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fitness-tracker",
+            "index": "projects/fitness-tracker/src/index.html",
+            "main": "projects/fitness-tracker/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/fitness-tracker/tsconfig.app.json",
+            "assets": [
+              "projects/fitness-tracker/src/favicon.ico",
+              "projects/fitness-tracker/src/assets"
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/fitness-tracker/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "1.5mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "fitness-tracker:build:production"
+            },
+            "development": {
+              "browserTarget": "fitness-tracker:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fitness-tracker:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/fitness-tracker/tsconfig.spec.json",
+            "assets": [
+              "projects/fitness-tracker/src/favicon.ico",
+              "projects/fitness-tracker/src/assets"
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "projects/fitness-tracker/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
   }
 }
