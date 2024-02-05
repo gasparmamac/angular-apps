@@ -23,7 +23,7 @@
               "projects/fitness-tracker/src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/fitness-tracker/src/my-theme.scss",
               "projects/fitness-tracker/src/styles.css"
             ],
             "scripts": []

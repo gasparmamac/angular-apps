@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getAuth, provideAuth } from '@angular/fire/auth';
+import {
+  getFirestore,
+  provideFirestore,
+  connectFirestoreEmulator,
+} from '@angular/fire/firestore';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,8 +39,23 @@ import { environment } from '../environments/environment';
     MaterialModule,
     FlexLayoutModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
+    provideFirestore(() => {
+      const db = getFirestore();
+      if (!environment.production) {
+        connectFirestoreEmulator(db, '127.0.0.1', 8080);
+      }
+      return db;
+    }),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (!environment.production) {
+        connectAuthEmulator(auth, 'http://localhost:9099', {
+          disableWarnings: true,
+        });
+      }
+      return auth;
+    }),
+
     AuthModule,
   ],
   providers: [AuthService, TrainingService, UiService],
