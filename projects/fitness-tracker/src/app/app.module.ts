@@ -23,7 +23,7 @@ import { TrainingService } from './training/training.service';
 
 import { UiService } from './share/ui.service';
 import { AuthModule } from './auth/auth.module';
-import { environment } from '../environments/environment.development';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
