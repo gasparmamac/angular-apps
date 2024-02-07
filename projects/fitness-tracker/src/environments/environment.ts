@@ -1,4 +1,5 @@
 export const environment = {
+  production: true,
   firebaseConfig: {
     apiKey: 'AIzaSyD4FXyYiSbekJaQtDxi5itySisUSwTOjSM',
     authDomain: 'practice-apps-55662.firebaseapp.com',
@@ -7,5 +8,4 @@ export const environment = {
     messagingSenderId: '430632385949',
     appId: '1:430632385949:web:2e04ab86b59cbe64e4c374',
   },
-  production: false,
 };
