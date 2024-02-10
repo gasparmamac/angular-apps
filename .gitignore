@@ -43,3 +43,4 @@ Thumbs.db
 
 # Ignore environment files
 projects/fitness-tracker/src/environments/*
+projects/mls-app/src/environments/*
