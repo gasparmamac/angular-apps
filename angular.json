@@ -96,6 +96,100 @@
           }
         }
       }
+    },
+    "mls-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/mls-app",
+      "sourceRoot": "projects/mls-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/mls-app",
+            "index": "projects/mls-app/src/index.html",
+            "main": "projects/mls-app/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/mls-app/tsconfig.app.json",
+            "assets": [
+              "projects/mls-app/src/favicon.ico",
+              "projects/mls-app/src/assets"
+            ],
+            "styles": [
+              "projects/mls-app/src/my-theme.scss",
+              "projects/mls-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "projects/mls-app/src/environments/environment.ts",
+                  "with": "projects/mls-app/src/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "mls-app:build:production"
+            },
+            "development": {
+              "browserTarget": "mls-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mls-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/mls-app/tsconfig.spec.json",
+            "assets": [
+              "projects/mls-app/src/favicon.ico",
+              "projects/mls-app/src/assets"
+            ],
+            "styles": [
+              "projects/fitness-tracker/src/my-theme.scss",
+              "projects/mls-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
     }
   }
 }
