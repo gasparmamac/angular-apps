@@ -6,13 +6,6 @@ import { AuthGuard } from './auth/auth.guard';
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   {
-    path: '**',
-    loadChildren: () =>
-      import('./page-not-found/page-not-found.module').then(
-        (m) => m.PageNotFoundModule
-      ),
-  },
-  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
@@ -22,6 +15,13 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./page-not-found/page-not-found.module').then(
+        (m) => m.PageNotFoundModule
+      ),
   },
 ];
 
