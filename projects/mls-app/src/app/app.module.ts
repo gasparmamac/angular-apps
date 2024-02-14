@@ -11,6 +11,9 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from '../environments/environment';
+import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -27,8 +30,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
     MaterialModule,
     BrowserAnimationsModule,
     DashboardModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: USE_AUTH_EMULATOR,
+      useValue: !environment.production ? ['http://localhost:9099'] : undefined,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

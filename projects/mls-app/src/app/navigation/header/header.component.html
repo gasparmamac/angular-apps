@@ -13,25 +13,15 @@
     </div>
   </div>
 
-  <a routerLink="auth/login"><mat-icon>login</mat-icon></a>
-  <button mat-icon-button><mat-icon>logout</mat-icon></button>
+  <ng-template #showLogin>
+    <a routerLink="auth/login"><mat-icon>login</mat-icon></a>
+  </ng-template>
 
-  <!-- <button
+  <button
+    *ngIf="user$ | async; else showLogin"
     mat-icon-button
-    [matMenuTriggerFor]="appMenu"
-    aria-label="icon for dropdown menu"
+    (click)="onLogout()"
   >
-    <mat-icon>keyboard_arrow_downward</mat-icon>
+    <mat-icon>logout</mat-icon>
   </button>
-  <mat-menu #appMenu>
-    <ng-template matMenuContent>
-      <a mat-menu-item routerLink="auth/login">
-        <mat-icon>login</mat-icon>
-        <span>Login</span>
-      </a>
-      <button mat-menu-item (click)="onLogout()">
-        <mat-icon>logout</mat-icon> <span>Logout</span>
-      </button>
-    </ng-template>
-  </mat-menu> -->
 </mat-toolbar>
